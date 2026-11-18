@@ -1,0 +1,94 @@
+{
+  "info": {
+    "name": "Banking API",
+    "_postman_id": "banking-assessment-nodejs",
+    "description": "Full-Stack Developer Assessment — Banking API (Node.js + Express + SQLite)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "1. Save Transaction",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/transactions", "host": ["{{baseUrl}}"], "path": ["api", "transactions"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"senderAccountNumber\": \"ACC001\",\n  \"receiverAccountNumber\": \"ACC002\",\n  \"amount\": 500.00,\n  \"description\": \"Payment for services\"\n}"
+        }
+      }
+    },
+    {
+      "name": "1b. Save Transaction — Validation Error",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/transactions", "host": ["{{baseUrl}}"], "path": ["api", "transactions"] },
+        "body": { "mode": "raw", "raw": "{\n  \"description\": \"Missing required fields\"\n}" }
+      }
+    },
+    {
+      "name": "2. Transfer Funds",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/transfers", "host": ["{{baseUrl}}"], "path": ["api", "transfers"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"senderAccountNumber\": \"ACC001\",\n  \"receiverAccountNumber\": \"ACC002\",\n  \"amount\": 200.00,\n  \"description\": \"Monthly rent\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2b. Transfer Funds — Insufficient Funds",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/transfers", "host": ["{{baseUrl}}"], "path": ["api", "transfers"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"senderAccountNumber\": \"ACC001\",\n  \"receiverAccountNumber\": \"ACC002\",\n  \"amount\": 999999.00,\n  \"description\": \"Should fail\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2c. Transfer Funds — Same Account",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/api/transfers", "host": ["{{baseUrl}}"], "path": ["api", "transfers"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"senderAccountNumber\": \"ACC001\",\n  \"receiverAccountNumber\": \"ACC001\",\n  \"amount\": 100.00,\n  \"description\": \"Should fail\"\n}"
+        }
+      }
+    },
+    {
+      "name": "3. Get Account Balance — ACC001",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/accounts/ACC001/balance", "host": ["{{baseUrl}}"], "path": ["api", "accounts", "ACC001", "balance"] }
+      }
+    },
+    {
+      "name": "3b. Get Account Balance — ACC002",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/accounts/ACC002/balance", "host": ["{{baseUrl}}"], "path": ["api", "accounts", "ACC002", "balance"] }
+      }
+    },
+    {
+      "name": "3c. Get Account Balance — Not Found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/accounts/INVALID/balance", "host": ["{{baseUrl}}"], "path": ["api", "accounts", "INVALID", "balance"] }
+      }
+    }
+  ]
+}
