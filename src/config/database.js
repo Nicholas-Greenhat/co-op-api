@@ -45,8 +45,8 @@ const initSchema = () => {
 
   const [{ values }] = db.exec('SELECT COUNT(*) as count FROM accounts');
   if (values[0][0] === 0) {
-    db.run("INSERT INTO accounts (account_number, owner_name, balance) VALUES ('ACC001', 'Alice Johnson', 5000.00)");
-    db.run("INSERT INTO accounts (account_number, owner_name, balance) VALUES ('ACC002', 'Bob Smith', 3000.00)");
+    db.run("INSERT INTO accounts (account_number, owner_name, balance) VALUES ('ACC001', 'Nicholas Kibet', 5000.00)");
+    db.run("INSERT INTO accounts (account_number, owner_name, balance) VALUES ('ACC002', 'Victor Akelo', 3000.00)");
     logger.info('Database seeded with default accounts');
   }
 };

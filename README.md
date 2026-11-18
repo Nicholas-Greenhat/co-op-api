@@ -51,8 +51,8 @@ Two accounts are pre-seeded:
 
 | Account Number | Owner         | Balance   |
 |----------------|---------------|-----------|
-| ACC001         | Alice Johnson | 5000.00   |
-| ACC002         | Bob Smith     | 3000.00   |
+| ACC001         | Nicholas Kibet | 5000.00   |
+| ACC002         | Victor Akelo   | 3000.00   |
 
 ## Running Tests
 
@@ -162,7 +162,7 @@ Moves money between accounts atomically and records the transaction with status 
   "message": "Account balance retrieved successfully",
   "data": {
     "accountNumber": "ACC001",
-    "ownerName": "Alice Johnson",
+    "ownerName": "Nicholas Kibet",
     "balance": 4800.00,
     "currency": "NGN"
   },
